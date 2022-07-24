@@ -42,7 +42,7 @@ object ChatService {
     fun updateChat(newChat: Chat):Boolean {
         for((index, chat) in chats.withIndex()) {
             if(chat.id == newChat.id) {
-                chats[index] = newChat;
+                chats[index] = newChat
                 return true
             }
         }
@@ -54,7 +54,7 @@ object ChatService {
     }
 
    // *** Операции с Сообщениями в Чатах
-   fun createMessage(chatId: Int, message: Message): Message? {
+   fun createMessage(chatId: Int, message: Message): Message {
        val currentChat = getChatById(chatId)
        if(currentChat != null) {
            currentChat.messages += message
@@ -88,10 +88,10 @@ object ChatService {
 
     // 2 - Получить список чатов, где есть последнее сообщение, иначе вернуть "нет сообщений"
     fun getChats(userId: Int): MutableList<String>  {
-        var listChats: MutableList<String> = mutableListOf()
+        val listChats: MutableList<String> = mutableListOf()
         for(chat in chats) {
             if(chat.user1Id == userId || chat.user2Id == userId) {
-                var messageText: String = "нет сообщений"
+                var messageText = "нет сообщений"
                 if(chat.messages.size != 0) {
                     messageText = chat.messages.last().text
                 }
@@ -108,7 +108,7 @@ object ChatService {
 
         for(chat in chats){
             if(chat.id == chatId) {
-                var count: Int = 0
+                var count = 0
                 for(message in chat.messages) {
                     if(message.id >= lastMessageId) {
                         message.unreaded = false
