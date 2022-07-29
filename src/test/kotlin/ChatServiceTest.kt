@@ -29,7 +29,7 @@ class ChatServiceTest {
 
     }
 
-    // 2 - Функция выкидывает исключение, если была попытка добавить комментарий к несуществующему посту.
+    // 2 - Функция выкидывает исключение, если была попытка добавить сообщение к несуществующему чату.
     @Test(expected = ChatNotFoundError::class)
     fun shouldThrow() {
         val chatService = ChatService
