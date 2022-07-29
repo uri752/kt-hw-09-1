@@ -23,9 +23,9 @@ class ChatServiceTest {
         val chatService = ChatService
 
         val message = Message(id = 1, text = "Сообщение для чата 10")
-        val commentedPost = chatService.createMessage(1,message)
+        val addedMessage = chatService.createMessage(10,message)
 
-        assertNotEquals(null, commentedPost)
+        assertNotEquals(null, addedMessage)
 
     }
 

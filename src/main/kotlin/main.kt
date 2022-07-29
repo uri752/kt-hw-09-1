@@ -20,24 +20,11 @@ object ChatService {
         return chats.last()
     }
 
-    fun getChatById(chatId: Int): Chat? {
-        for(chat in chats) {
-            if(chat.id == chatId) {
-                return chat
-            }
-        }
-        return null
-    }
+    fun getChatById(chatId: Int): Chat?  = chats.find{it.id == chatId}
+
 
     // получить чаты пользователя
-    fun getChatByUserId(userId: Int): Chat? {
-        for(chat in chats) {
-            if( (chat.user1Id == userId) || (chat.user2Id == userId) )  {
-                return chat
-            }
-        }
-        return null
-    }
+    fun getChatByUserId(userId: Int): Chat? = chats.find{ (it.user1Id == userId) || (it.user2Id == userId)}
 
     fun updateChat(newChat: Chat):Boolean {
         for((index, chat) in chats.withIndex()) {
@@ -54,7 +41,7 @@ object ChatService {
     }
 
    // *** Операции с Сообщениями в Чатах
-   fun createMessage(chatId: Int, message: Message): Message {
+   fun createMessage(chatId: Int, message: Message): Message  {
        val currentChat = getChatById(chatId)
        if(currentChat != null) {
            currentChat.messages += message
@@ -76,12 +63,7 @@ object ChatService {
     fun getUnreadChatCount(): Int {
         var countChats = 0
         for(chat in chats) {
-            for(message in chat.messages) {
-                if(message.unreaded) {
-                    countChats ++
-                    break
-                }
-            }
+            countChats += chat.messages.filter{ it.unreaded }?.count() ?: 0
         }
         return countChats
     }
